@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Customer Dashboard</title>
+</head>
+<body>
+    <h1>Welcome, {{ session['user_name'] }}</h1>
+
+    <h2>Book an Appointment</h2>
+    <form method="POST" action="/book">
+        <label>Select Service:</label>
+        <select name="service_id" required>
+            {% for service in services %}
+            <option value="{{ service.id }}">{{ service.service_name }} - ${{ service.price }}</option>
+            {% endfor %}
+        </select><br>
+        <label>Appointment Time:</label><input type="datetime-local" name="appointment_time" required><br>
+        <button type="submit">Book Appointment</button>
+    </form>
+
+    <h2>Your Appointments</h2>
+    <ul>
+        {% for appointment in appointments %}
+        <li>{{ appointment.service_name }} at {{ appointment.appointment_time }}</li>
+        {% endfor %}
+    </ul>
+
+    <p><a href="/appointments">View All Appointments</a></p>
+    <p><a href="/logout">Logout</a></p>
+</body>
+</html>
