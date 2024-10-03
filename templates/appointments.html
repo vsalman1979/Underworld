@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Your Appointments</title>
+</head>
+<body>
+    <h1>Your Appointments</h1>
+
+    <ul>
+        {% for appointment in appointments %}
+        <li>{{ appointment.service_name }} scheduled for {{ appointment.appointment_time }}</li>
+        {% endfor %}
+    </ul>
+
+    <p><a href="/dashboard">Back to Dashboard</a></p>
+    <p><a href="/logout">Logout</a></p>
+</body>
+</html>
