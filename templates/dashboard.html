@@ -1,31 +1,140 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Customer Dashboard</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background: linear-gradient(to right, #ffecd2, #fcb69f);
+            color: #2c3e50;
+            margin: 0;
+            padding: 0;
+        }
+
+        /* Dashboard Container */
+        .dashboard-container {
+            max-width: 800px;
+            margin: 50px auto;
+            background-color: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.1);
+        }
+
+        /* Welcome Heading */
+        h1 {
+            text-align: center;
+            color: #e74c3c;
+            font-size: 2.5rem;
+        }
+
+        h2 {
+            color: #34495e;
+            font-size: 1.8rem;
+            margin-bottom: 20px;
+        }
+
+        /* Form Styling */
+        form {
+            margin-bottom: 40px;
+        }
+
+        label {
+            font-weight: bold;
+            color: #34495e;
+            display: block;
+            margin-bottom: 10px;
+        }
+
+        select, input {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            margin-bottom: 20px;
+        }
+
+        /* Submit Button */
+        button {
+            background-color: #3498db;
+            color: white;
+            padding: 12px 20px;
+            border: none;
+            border-radius: 5px;
+            font-size: 1.1rem;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+            width: 100%;
+        }
+
+        button:hover {
+            background-color: #2980b9;
+        }
+
+        /* Appointment List */
+        ul {
+            list-style-type: none;
+            padding: 0;
+        }
+
+        li {
+            background-color: #f7f7f7;
+            margin-bottom: 10px;
+            padding: 10px;
+            border-radius: 5px;
+            box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.05);
+        }
+
+        /* Links */
+        a {
+            text-decoration: none;
+            color: #3498db;
+            font-weight: bold;
+            display: inline-block;
+            margin: 10px 0;
+        }
+
+        a:hover {
+            text-decoration: underline;
+        }
+
+        /* Logout Link */
+        .logout {
+            display: block;
+            margin-top: 40px;
+            text-align: center;
+        }
+
+    </style>
 </head>
 <body>
-    <h1>Welcome, {{ session['user_name'] }}</h1>
+    <div class="dashboard-container">
+        <h1>Welcome, {{ session['user_name'] }}</h1>
 
-    <h2>Book an Appointment</h2>
-    <form method="POST" action="/book">
-        <label>Select Service:</label>
-        <select name="service_id" required>
-            {% for service in services %}
-            <option value="{{ service.id }}">{{ service.service_name }} - ${{ service.price }}</option>
+        <h2>Book an Appointment</h2>
+        <form method="POST" action="/book">
+            <label>Select Service:</label>
+            <select name="service_id" required>
+                {% for service in services %}
+                <option value="{{ service.id }}">{{ service.service_name }} - ${{ service.price }}</option>
+                {% endfor %}
+            </select><br>
+            <label>Appointment Time:</label>
+            <input type="datetime-local" name="appointment_time" required><br>
+            <button type="submit">Book Appointment</button>
+        </form>
+
+        <h2>Your Appointments</h2>
+        <ul>
+            {% for appointment in appointments %}
+            <li>{{ appointment.service_name }} at {{ appointment.appointment_time }}</li>
             {% endfor %}
-        </select><br>
-        <label>Appointment Time:</label><input type="datetime-local" name="appointment_time" required><br>
-        <button type="submit">Book Appointment</button>
-    </form>
+        </ul>
 
-    <h2>Your Appointments</h2>
-    <ul>
-        {% for appointment in appointments %}
-        <li>{{ appointment.service_name }} at {{ appointment.appointment_time }}</li>
-        {% endfor %}
-    </ul>
-
-    <p><a href="/appointments">View All Appointments</a></p>
-    <p><a href="/logout">Logout</a></p>
+        <p><a href="/appointments">View All Appointments</a></p>
+        <p class="logout"><a href="/logout">Logout</a></p>
+    </div>
 </body>
 </html>

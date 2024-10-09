@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>View Appointments</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background: linear-gradient(to right, #74ebd5, #ACB6E5);
+            margin: 0;
+            padding: 20px;
+            color: #2c3e50;
+        }
+        h1 {
+            text-align: center;
+            color: #2c3e50;
+        }
+        ul {
+            list-style-type: none;
+            padding: 0;
+        }
+        li {
+            background-color: #f9f9f9;
+            margin: 10px 0;
+            padding: 15px;
+            border-radius: 5px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+        a {
+            display: block;
+            text-align: center;
+            margin-top: 20px;
+            text-decoration: none;
+            color: #3498db;
+        }
+        a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+    <h1>View Appointments</h1>
+    <ul>
+        {% for appointment in appointments %}
+            <li>{{ appointment.user_name }} booked {{ appointment.service_name }} at {{ appointment.appointment_time }}</li>
+        {% else %}
+            <li>No appointments found.</li>
+        {% endfor %}
+    </ul>
+    <a href="/admin_dashboard">Back to Dashboard</a>
+    <a href="/logout">Logout</a>
+</body>
+</html>

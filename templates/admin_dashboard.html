@@ -1,32 +1,144 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Admin Dashboard</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background: linear-gradient(to right, #74ebd5, #ACB6E5);
+            margin: 0;
+            padding: 20px;
+            color: #2c3e50;
+        }
+
+        .dashboard-container {
+            background-color: white;
+            padding: 40px;
+            border-radius: 10px;
+            box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.2);
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        h1 {
+            text-align: center;
+            color: #2c3e50;
+        }
+
+        h2 {
+            color: #34495e;
+            font-size: 1.8rem;
+            margin: 20px 0;
+        }
+
+        label {
+            display: block;
+            font-weight: bold;
+            color: #34495e;
+            margin-bottom: 5px;
+        }
+
+        input {
+            width: 100%;
+            padding: 12px;
+            margin-bottom: 20px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            font-size: 1rem;
+        }
+
+        button {
+            background-color: #3498db;
+            color: white;
+            padding: 12px 20px;
+            border: none;
+            border-radius: 5px;
+            font-size: 1.1rem;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+            width: 100%;
+        }
+
+        button:hover {
+            background-color: #2980b9;
+        }
+
+        ul {
+            list-style-type: none;
+            padding: 0;
+            margin: 20px 0;
+        }
+
+        li {
+            background-color: #f9f9f9;
+            margin-bottom: 15px;
+            padding: 15px;
+            border-radius: 5px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            font-size: 1.2rem;
+            text-align: left;
+        }
+
+        .footer-text {
+            margin-top: 20px;
+            font-size: 0.9rem;
+            color: #7f8c8d;
+        }
+
+        a {
+            text-decoration: none;
+            color: #3498db;
+        }
+
+        a:hover {
+            text-decoration: underline;
+        }
+    </style>
 </head>
 <body>
-    <h1>Admin Dashboard</h1>
+    <div class="dashboard-container">
+        <h1>Admin Dashboard</h1>
 
-    <h2>Add a New Service</h2>
-    <form method="POST" action="/add_service">
-        <label>Service Name:</label><input type="text" name="service_name" required><br>
-        <label>Price:</label><input type="number" name="price" required><br>
-        <button type="submit">Add Service</button>
-    </form>
+        <h2>Add a New Service</h2>
+        <form method="POST" action="/add_service">
+            <label for="service_name">Service Name:</label>
+            <input type="text" id="service_name" name="service_name" required>
 
-    <h2>Existing Services</h2>
-    <ul>
-        {% for service in services %}
-        <li>{{ service.service_name }} - ${{ service.price }}</li>
-        {% endfor %}
-    </ul>
+            <label for="price">Price:</label>
+            <input type="number" id="price" name="price" required>
 
-    <h2>Appointments</h2>
-    <ul>
-        {% for appointment in appointments %}
-        <li>{{ appointment.user_name }} booked {{ appointment.service_name }} at {{ appointment.appointment_time }}</li>
-        {% endfor %}
-    </ul>
+            <button type="submit">Add Service</button>
+        </form>
 
-    <p><a href="/logout">Logout</a></p>
+        <h2>Existing Services</h2>
+        <ul>
+            {% if services %}
+                {% for service in services %}
+                <li>{{ service.service_name }} - ${{ service.price }}</li>
+                {% endfor %}
+            {% else %}
+                <li>No services available.</li>
+            {% endif %}
+        </ul>
+
+        <h2>Appointments</h2>
+        <ul>
+            {% if appointments %}
+                {% for appointment in appointments %}
+                <li>{{ appointment.user_name }} booked {{ appointment.service_name }} at {{ appointment.appointment_time }}</li>
+                {% endfor %}
+            {% else %}
+                <li>No appointments found.</li>
+            {% endif %}
+        </ul>
+
+        <p><a href="/logout">Logout</a></p>
+    </div>
+
+    <footer>
+        <p class="footer-text">© 2024 Haircut Appointment Booking System. All Rights Reserved.</p>
+    </footer>
 </body>
 </html>

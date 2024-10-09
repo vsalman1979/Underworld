@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Your Appointments</title>
+    <style>
+        /* Global Styles */
+        body {
+            font-family: 'Arial', sans-serif;
+            background: linear-gradient(to right, #d4fc79, #96e6a1);
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            color: #2c3e50;
+        }
+
+        /* Main Heading */
+        h1 {
+            color: #27ae60;
+            font-size: 2.5rem;
+            margin-bottom: 30px;
+        }
+
+        /* Appointment List */
+        ul {
+            list-style-type: none;
+            padding: 0;
+            width: 100%;
+            max-width: 600px;
+            margin-bottom: 40px;
+        }
+
+        li {
+            background-color: white;
+            margin-bottom: 15px;
+            padding: 15px;
+            border-radius: 5px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            font-size: 1.2rem;
+        }
+
+        /* Link Styles */
+        a {
+            text-decoration: none;
+            color: #3498db;
+            font-weight: bold;
+            display: inline-block;
+            margin: 10px 0;
+        }
+
+        a:hover {
+            text-decoration: underline;
+        }
+
+        /* Footer */
+        .footer-text {
+            margin-top: 20px;
+            font-size: 0.9rem;
+            color: #7f8c8d;
+        }
+
+    </style>
+</head>
+<body>
+    <h1>Your Appointments</h1>
+
+    <ul>
+        {% for appointment in appointments %}
+        <li>{{ appointment.service_name }} scheduled for {{ appointment.appointment_time }}</li>
+        {% else %}
+        <li>No appointments scheduled.</li>
+        {% endfor %}
+    </ul>
+
+    <p><a href="/dashboard">Back to Dashboard</a></p>
+    <p><a href="/logout">Logout</a></p>
+
+    <footer class="footer-text">
+        <p>© 2024 Haircut Appointment Booking System. All Rights Reserved.</p>
+    </footer>
+</body>
+</html>
